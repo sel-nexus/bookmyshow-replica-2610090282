@@ -36,5 +36,7 @@ export function loadConfig(environment: NodeJS.ProcessEnv = process.env): AppCon
   };
 }
 
-/** Expose the validated runtime settings. */
-export const config = loadConfig();
+/** Load validated process environment when starting the executable service. */
+export function loadRuntimeConfig(): AppConfig {
+  return loadConfig();
+}

@@ -1,8 +1,9 @@
 /** Start the OTP access API server. */
 import { createApp } from './app';
-import { config } from './config';
+import { loadRuntimeConfig } from './config';
 import { createDatabase } from './db/database';
 
+const config = loadRuntimeConfig();
 const database = createDatabase(config.databasePath);
 const app = createApp(database, config);
 
