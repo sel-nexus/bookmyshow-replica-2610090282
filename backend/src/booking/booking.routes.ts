@@ -7,8 +7,8 @@ import { HttpError } from '../http/errors';
 import type { BookingService } from './booking.service';
 
 const bookingSchema = z.object({
-  movieId: z.string().trim().min(1),
-  theatreId: z.string().trim().min(1),
+  movieId: z.string().trim().min(1).max(255),
+  theatreId: z.string().trim().min(1).max(255),
   seats: z.tuple([z.literal('A1'), z.literal('A2'), z.literal('A3')]),
   paymentMethod: z.enum(['CARD', 'UPI']),
   total: z.literal(450)

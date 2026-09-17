@@ -1,14 +1,30 @@
-/** Test movie discovery and deterministic seat handoff behavior. */
+/** Test movie discovery, protected pages, and deterministic seat handoff behavior. */
 import '@testing-library/jest-dom/vitest';
-import { render, screen } from '@testing-library/react';
+import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { MovieGrid } from '../components/MovieGrid';
 import { TheatreList } from '../components/TheatreList';
 import { SeatGrid } from '../components/SeatGrid';
 
+const push = vi.fn();
+const replace = vi.fn();
+const getMovies = vi.fn();
+const getTheatres = vi.fn();
+const updateJourney = vi.fn();
+const bookingState = { token: '', updateJourney };
 const movies = [{ id: 'mov_paradise', title: 'Paradise' }];
 const theatres = [{ id: 'theatre_grand', name: 'Grand Cinema' }];
+
+vi.mock('next/navigation', () => ({ useRouter: (): { push: typeof push; replace: typeof replace } => ({ push, replace }) }));
+vi.mock('../lib/apiClient', () => ({ getMovies, getTheatres }));
+vi.mock('../state/BookingContext', () => ({ useBooking: (): typeof bookingState => bookingState }));
+
+afterEach(() => {
+  cleanup();
+  vi.clearAllMocks();
+  bookingState.token = '';
+});
 
 describe('discovery components', () => {
   it('renders movie API results and changes nothing until the explicit movie button is clicked', async (): Promise<void> => {
@@ -48,5 +64,72 @@ describe('discovery components', () => {
     await userEvent.click(button);
     expect(selectSeats).toHaveBeenNthCalledWith(1, ['A1', 'A2', 'A3'], 450);
     expect(selectSeats).toHaveBeenNthCalledWith(2, ['A1', 'A2', 'A3'], 450);
+  });
+});
+
+describe('protected discovery pages', () => {
+  it('redirects an unauthenticated dashboard visitor without loading protected controls', async (): Promise<void> => {
+    const { default: DashboardPage } = await import('../app/dashboard/page');
+    render(<DashboardPage />);
+    await waitFor(() => expect(replace).toHaveBeenCalledWith('/login'));
+    expect(getMovies).not.toHaveBeenCalled();
+    expect(screen.queryByRole('button', { name: /choose/i })).not.toBeInTheDocument();
+  });
+
+  it('shows dashboard loading then its API error for an authenticated visitor', async (): Promise<void> => {
+    bookingState.token = 'backend-token';
+    let rejectMovies: (error: Error) => void = () => undefined;
+    getMovies.mockReturnValue(new Promise((_, reject) => { rejectMovies = reject; }));
+    const { default: DashboardPage } = await import('../app/dashboard/page');
+    render(<DashboardPage />);
+    expect(screen.getByRole('status')).toHaveTextContent('Loading movies…');
+    rejectMovies(new Error('Movies are unavailable.'));
+    expect(await screen.findByRole('alert')).toHaveTextContent('Movies are unavailable.');
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+  });
+
+  it('renders resolved dashboard movies and continues only after an explicit movie choice', async (): Promise<void> => {
+    bookingState.token = 'backend-token';
+    getMovies.mockResolvedValue(movies);
+    const { default: DashboardPage } = await import('../app/dashboard/page');
+    render(<DashboardPage />);
+
+    const chooseMovie = await screen.findByRole('button', { name: 'Choose Paradise' });
+    expect(screen.getByRole('heading', { name: 'Paradise' })).toBeInTheDocument();
+    expect(getMovies).toHaveBeenCalled();
+    expect(updateJourney).not.toHaveBeenCalled();
+    await userEvent.click(chooseMovie);
+    expect(updateJourney).toHaveBeenCalledWith({ movie: movies[0], theatre: null, seats: [], total: 0 });
+    expect(push).toHaveBeenCalledWith('/movies/mov_paradise/theatres');
+  });
+
+  it('shows theatre loading then its API error for the selected movie', async (): Promise<void> => {
+    bookingState.token = 'backend-token';
+    let rejectTheatres: (error: Error) => void = () => undefined;
+    getTheatres.mockReturnValue(new Promise((_, reject) => { rejectTheatres = reject; }));
+    const { default: TheatrePage } = await import('../app/movies/[movieId]/theatres/page');
+    render(<TheatrePage params={{ movieId: 'mov_paradise' }} />);
+    expect(screen.getByRole('status')).toHaveTextContent('Loading theatres…');
+    expect(getTheatres).toHaveBeenCalledWith('mov_paradise');
+    rejectTheatres(new Error('Theatres are unavailable.'));
+    expect(await screen.findByRole('alert')).toHaveTextContent('Theatres are unavailable.');
+    expect(screen.queryByRole('button', { name: 'Continue to seats' })).not.toBeInTheDocument();
+  });
+
+  it('renders resolved theatres and continues only after an explicit theatre choice', async (): Promise<void> => {
+    bookingState.token = 'backend-token';
+    getTheatres.mockResolvedValue(theatres);
+    const { default: TheatrePage } = await import('../app/movies/[movieId]/theatres/page');
+    render(<TheatrePage params={{ movieId: 'mov_paradise' }} />);
+
+    const theatre = await screen.findByRole('button', { name: 'Grand Cinema' });
+    const continueToSeats = await screen.findByRole('button', { name: 'Continue to seats' });
+    expect(getTheatres).toHaveBeenCalledWith('mov_paradise');
+    expect(continueToSeats).toBeDisabled();
+    await userEvent.click(theatre);
+    expect(continueToSeats).toBeEnabled();
+    await userEvent.click(continueToSeats);
+    expect(updateJourney).toHaveBeenCalledWith({ theatre: theatres[0], seats: [], total: 0 });
+    expect(push).toHaveBeenCalledWith('/seats');
   });
 });

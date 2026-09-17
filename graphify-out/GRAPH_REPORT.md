@@ -7,23 +7,23 @@
 
 ## 1. Executive Summary
 
-- **Total Components**: `194`
-- **Total Connections**: `226`
+- **Total Components**: `262`
+- **Total Connections**: `381`
 - **Subsystem Modules**: `1`
-- **Dependency Types**: `9`
+- **Dependency Types**: `10`
 
 **Key Architectural Hubs:**
 
 | # | Component | File | Type | Connections |
 |---|-----------|------|------|-------------|
-| 1 | `compilerOptions` | `frontend/tsconfig.json` | function | 15 |
-| 2 | `app.ts` | `backend/src/app.ts` | file | 13 |
-| 3 | `devDependencies` | `backend/package.json` | function | 11 |
-| 4 | `compilerOptions` | `backend/tsconfig.json` | function | 11 |
-| 5 | `devDependencies` | `frontend/package.json` | function | 11 |
-| 6 | `auth.service.ts` | `backend/src/auth/auth.service.ts` | file | 10 |
-| 7 | `index.ts` | `backend/src/index.ts` | file | 9 |
-| 8 | `config.ts` | `backend/src/config.ts` | file | 8 |
+| 1 | `app.ts` | `backend/src/app.ts` | file | 24 |
+| 2 | `apiClient.ts` | `frontend/lib/apiClient.ts` | file | 21 |
+| 3 | `BookingContext.tsx` | `frontend/state/BookingContext.tsx` | class | 17 |
+| 4 | `useBooking()` | `frontend/state/BookingContext.tsx` | method | 15 |
+| 5 | `compilerOptions` | `frontend/tsconfig.json` | function | 15 |
+| 6 | `config.ts` | `backend/src/config.ts` | file | 12 |
+| 7 | `devDependencies` | `backend/package.json` | function | 11 |
+| 8 | `compilerOptions` | `backend/tsconfig.json` | function | 11 |
 
 ---
 
@@ -33,33 +33,32 @@
 
 | Relationship | Count | Share |
 |-------------|-------|-------|
-| `contains` | 121 | 54% |
-| `imports` | 48 | 21% |
-| `imports_from` | 22 | 10% |
-| `extends` | 11 | 5% |
-| `calls` | 9 | 4% |
-| `references` | 7 | 3% |
-| `method` | 6 | 3% |
+| `contains` | 162 | 43% |
+| `imports` | 92 | 24% |
+| `imports_from` | 63 | 17% |
+| `calls` | 25 | 7% |
+| `references` | 14 | 4% |
+| `method` | 11 | 3% |
+| `extends` | 11 | 3% |
 | `indirect_call` | 1 | 0% |
+| `rationale_for` | 1 | 0% |
 | `inherits` | 1 | 0% |
 
 ### Hub Dependency Diagram
 
 ```mermaid
 flowchart TD
-    frontend_tsconfig_compileroptions["compilerOptions"]
     backend_src_app["app.ts"]
+    frontend_lib_apiclient["apiClient.ts"]
+    frontend_state_bookingcontext["BookingContext.tsx"]
+    frontend_state_bookingcontext_usebooking["useBooking()"]
+    frontend_tsconfig_compileroptions["compilerOptions"]
+    backend_src_config["config.ts"]
     backend_package_devdependencies["devDependencies"]
     backend_tsconfig_compileroptions["compilerOptions"]
-    frontend_package_devdependencies["devDependencies"]
-    backend_src_auth_auth_service["auth.service.ts"]
-    backend_src_index["index.ts"]
-    backend_src_config["config.ts"]
-    backend_src_app <--> backend_src_auth_auth_service
     backend_src_app <--> backend_src_config
-    backend_src_app <--> backend_src_index
-    backend_src_auth_auth_service <--> backend_src_config
-    backend_src_config <--> backend_src_index
+    frontend_lib_apiclient <--> frontend_state_bookingcontext
+    frontend_state_bookingcontext <--> frontend_state_bookingcontext_usebooking
 ```
 
 ### Most Connected Pairs
@@ -81,22 +80,24 @@ flowchart TD
 
 ## 3. Subsystem & Module Breakdown
 
-### 3.1 backend
-**Nodes**: `194`  
-**Files**: `.engine/workers/4a6467683208/memory/progress_summary.md`, `backend/package.json`, `backend/src/app.ts`, `backend/src/auth/auth.routes.ts`, `backend/src/auth/auth.service.ts`, `backend/src/config.ts` +20 more
+### 3.1 frontend
+**Nodes**: `262`  
+**Files**: `backend/package.json`, `backend/src/app.ts`, `backend/src/auth/auth.routes.ts`, `backend/src/auth/auth.service.ts`, `backend/src/booking/booking.routes.ts`, `backend/src/booking/booking.service.ts` +43 more
 
 | Component | Type | File | Connections |
 |-----------|------|------|-------------|
+| `app.ts` | file | `backend/src/app.ts` | 24 |
+| `apiClient.ts` | file | `frontend/lib/apiClient.ts` | 21 |
+| `BookingContext.tsx` | class | `frontend/state/BookingContext.tsx` | 17 |
+| `useBooking()` | method | `frontend/state/BookingContext.tsx` | 15 |
 | `compilerOptions` | function | `frontend/tsconfig.json` | 15 |
-| `app.ts` | file | `backend/src/app.ts` | 13 |
+| `config.ts` | file | `backend/src/config.ts` | 12 |
 | `devDependencies` | function | `backend/package.json` | 11 |
 | `compilerOptions` | function | `backend/tsconfig.json` | 11 |
 | `devDependencies` | function | `frontend/package.json` | 11 |
-| `auth.service.ts` | file | `backend/src/auth/auth.service.ts` | 10 |
-| `index.ts` | file | `backend/src/index.ts` | 9 |
-| `config.ts` | file | `backend/src/config.ts` | 8 |
-| `BookingContext.tsx` | class | `frontend/state/BookingContext.tsx` | 8 |
-| `dependencies` | function | `backend/package.json` | 7 |
+| `createApp()` | method | `backend/src/app.ts` | 10 |
+
+**External dependencies:** `NOTE: This file should not be edited` (1)
 
 
 ---
@@ -105,18 +106,18 @@ flowchart TD
 
 Public classes and functions by subsystem.
 
-### backend
+### frontend
 
 | Name | Type | File | Connections |
 |------|------|------|-------------|
+| `BookingContext.tsx` | class | `frontend/state/BookingContext.tsx` | 17 |
 | `compilerOptions` | function | `frontend/tsconfig.json` | 15 |
 | `devDependencies` | function | `backend/package.json` | 11 |
 | `compilerOptions` | function | `backend/tsconfig.json` | 11 |
 | `devDependencies` | function | `frontend/package.json` | 11 |
-| `BookingContext.tsx` | class | `frontend/state/BookingContext.tsx` | 8 |
-| `dependencies` | function | `backend/package.json` | 7 |
-| `AuthService` | class | `backend/src/auth/auth.service.ts` | 7 |
-| `backend/package.json` | function | `backend/package.json` | 6 |
+| `theatres/page.tsx` | function | `frontend/app/movies/[movieId]/theatres/page.tsx` | 9 |
+| `CheckoutForm.tsx` | class | `frontend/components/CheckoutForm.tsx` | 9 |
+| `dashboard/page.tsx` | function | `frontend/app/dashboard/page.tsx` | 8 |
 
 ---
 
@@ -126,38 +127,53 @@ Public classes and functions by subsystem.
 
 | Type | Count | Share |
 |------|-------|-------|
-| function | 139 | 72% |
-| class | 21 | 11% |
-| method | 20 | 10% |
-| file | 14 | 7% |
+| function | 154 | 59% |
+| class | 50 | 19% |
+| method | 33 | 13% |
+| file | 25 | 10% |
+
+### High-Connectivity Hotspots
+
+**3** component(s) with >15 connections:
+
+| Component | File | Connections |
+|-----------|------|-------------|
+| `app.ts` | `backend/src/app.ts` | 24 |
+| `apiClient.ts` | `frontend/lib/apiClient.ts` | 21 |
+| `BookingContext.tsx` | `frontend/state/BookingContext.tsx` | 17 |
 
 ### Dependency Cycles
 
-**45** circular dependency loop(s) detected:
+**136** circular dependency loop(s) detected:
 
 | # | Cycle Path |
 |---|-----------|
-| 1 | `frontend_components_loginform → frontend_state_bookingcontext → frontend_state_bookingcontext_usebooking` |
-| 2 | `frontend_components_otpform → frontend_state_bookingcontext → frontend_state_bookingcontext_usebooking` |
-| 3 | `frontend_app_layout → frontend_state_bookingcontext_bookingprovider → frontend_state_bookingcontext` |
-| 4 | `frontend_state_bookingcontext_bookingcontextvalue → frontend_state_bookingcontext_bookingjourney → frontend_state_bookingcontext` |
+| 1 | `frontend_components_theatrelist → frontend_components_theatrelist_theatrelist → frontend_tests_discovery_test` |
+| 2 | `frontend_components_theatrelist → frontend_app_movies_movieid_theatres_page → frontend_components_theatrelist_theatrelist` |
+| 3 | `frontend_app_movies_movieid_theatres_page_theatrepage → frontend_state_bookingcontext_usebooking → frontend_app_movies_movieid_theatres_page` |
+| 4 | `frontend_state_bookingcontext → frontend_state_bookingcontext_usebooking → frontend_app_movies_movieid_theatres_page` |
 | 5 | `frontend_components_otpform → frontend_components_otpform_otpform → frontend_state_bookingcontext_usebooking` |
 | 6 | `frontend_components_otpform → frontend_app_verify_page → frontend_components_otpform_otpform` |
-| 7 | `frontend_lib_apiclient → frontend_lib_apiclient_verifyotp → frontend_components_otpform` |
-| 8 | `frontend_lib_apiclient → frontend_lib_apiclient_toapierror → frontend_lib_apiclient_verifyotp` |
-| 9 | `frontend_components_loginform → frontend_lib_apiclient_initiateotp → frontend_lib_apiclient_toapierror → frontend_lib_apiclient_verifyotp → frontend_components_otpform → frontend_state_bookingcontext_usebooking` |
-| 10 | `frontend_lib_apiclient → frontend_lib_apiclient_initiateotp → frontend_lib_apiclient_toapierror` |
+| 7 | `frontend_lib_apiclient → frontend_components_otpform → frontend_state_bookingcontext_usebooking → frontend_app_movies_movieid_theatres_page` |
+| 8 | `frontend_state_bookingcontext → frontend_components_otpform → frontend_state_bookingcontext_usebooking` |
+| 9 | `frontend_lib_apiclient → frontend_lib_apiclient_verifyotp → frontend_components_otpform` |
+| 10 | `frontend_lib_apiclient → frontend_lib_apiclient_toapierror → frontend_lib_apiclient_verifyotp` |
 
 ### Orphaned Components
 
-**4** isolated node(s) with no connections:
+**9** isolated node(s) with no connections:
 
 | Component | File |
 |-----------|------|
 | `auth.spec.ts` | `frontend/e2e/auth.spec.ts` |
+| `booking.spec.ts` | `frontend/e2e/booking.spec.ts` |
+| `discovery.spec.ts` | `frontend/e2e/discovery.spec.ts` |
+| `playwright.config.ts` | `frontend/playwright.config.ts` |
 | `vitest.config.ts` | `frontend/vitest.config.ts` |
-| `Native SQLite Runtime Blocker` | `.engine/workers/4a6467683208/memory/progress_summary.md` |
-| `TypeScript Typecheck Verification` | `.engine/workers/4a6467683208/memory/progress_summary.md` |
+| `Booking Data Persistent SQLite Volume` | `docker-compose.yml` |
+| `demo-otp-access Todo` | `todos.yaml` |
+| `discovery-and-seats Todo` | `todos.yaml` |
+| `checkout-and-confirmation Todo` | `todos.yaml` |
 
 ---
 

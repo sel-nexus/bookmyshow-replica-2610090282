@@ -72,10 +72,17 @@ describe('catalogue API', () => {
     expect(unknown.body).toEqual({ data: { movieId: 'missing', theatres: [] } });
   });
 
-  it('rejects a malformed movieId query value', async (): Promise<void> => {
-    const { app } = await makeTestApp();
-    const response = await request(app).get('/api/theatres').query({ movieId: '   ' });
-    expect(response.status).toBe(400);
-    expect(response.body.error.code).toBe('VALIDATION_ERROR');
+  it('rejects malformed query values and safely contains SQL/XSS-shaped catalogue queries', async (): Promise<void> => {
+    const { app, database } = await makeTestApp();
+    const malformed = await request(app).get('/api/theatres').query({ movieId: '   ' });
+    expect(malformed.status).toBe(400);
+    expect(malformed.body.error).toMatchObject({ code: 'VALIDATION_ERROR', message: 'Request body is invalid.' });
+    for (const movieId of ["mov_paradise' OR 1=1 --", '<script>alert(1)</script>']) {
+      const response = await request(app).get('/api/theatres').query({ movieId });
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual({ data: { movieId, theatres: [] } });
+    }
+    expect(database.prepare('SELECT COUNT(*) AS count FROM movies').get()).toEqual({ count: 3 });
+    expect(database.prepare('SELECT COUNT(*) AS count FROM theatres').get()).toEqual({ count: 3 });
   });
 });

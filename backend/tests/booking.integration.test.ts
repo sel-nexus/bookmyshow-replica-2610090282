@@ -20,6 +20,13 @@ describe('booking integration flow', () => {
     expect((await request(app).get('/api/theatres?movieId=mov_paradise')).body.data.theatres).toContainEqual({ id: 'theatre_grand', name: 'Grand Cinema' });
     const booking = await request(app).post('/api/bookings').set('Authorization', `Bearer ${token}`).send({ movieId: 'mov_paradise', theatreId: 'theatre_grand', seats: ['A1', 'A2', 'A3'], paymentMethod: 'CARD', total: 450 });
     expect(booking.status).toBe(201); expect(database.prepare('SELECT COUNT(*) AS count FROM bookings').get()).toEqual({ count: 1 });
+    const stale = await request(app).post('/api/bookings').set('Authorization', `Bearer ${token}`).send({ movieId: 'mov_paradise', theatreId: 'theatre_midtown', seats: ['A1', 'A2', 'A3'], paymentMethod: 'CARD', total: 450 });
+    expect(stale.status).toBe(404);
+    expect(stale.body.error.code).toBe('MOVIE_THEATRE_NOT_FOUND');
+    const unmapped = await request(app).post('/api/bookings').set('Authorization', `Bearer ${token}`).send({ movieId: 'stale-movie', theatreId: 'theatre_grand', seats: ['A1', 'A2', 'A3'], paymentMethod: 'CARD', total: 450 });
+    expect(unmapped.status).toBe(404);
+    expect(unmapped.body.error.code).toBe('MOVIE_NOT_FOUND');
+    expect(database.prepare('SELECT COUNT(*) AS count FROM bookings').get()).toEqual({ count: 1 });
     expect((await request(app).post('/api/bookings').set('Authorization', 'Bearer invalid').send({})).status).toBe(401);
   });
 });

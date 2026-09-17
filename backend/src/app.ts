@@ -24,8 +24,17 @@ export function createApp(database: Database.Database, appConfig: AppConfig): ex
   app.use('/api/auth', createAuthRouter(authService));
   app.use('/api', createCatalogRouter(catalogService));
   app.use('/api', createBookingRouter(bookingService, appConfig));
+  /** Report database-backed readiness without exposing connection details. */
   app.get('/api/health', (_request: Request, response: Response): void => {
-    response.status(checkDatabase(database) ? 200 : 503).json({ status: 'ok', database: 'connected' });
+    try {
+      if (!checkDatabase(database)) {
+        response.status(503).json({ error: { code: 'SERVICE_UNAVAILABLE', message: 'Database is unreachable.' } });
+        return;
+      }
+      response.status(200).json({ data: { status: 'ok', database: 'reachable' } });
+    } catch (_error: unknown) {
+      response.status(503).json({ error: { code: 'SERVICE_UNAVAILABLE', message: 'Database is unreachable.' } });
+    }
   });
   app.use(errorHandler);
   return app;

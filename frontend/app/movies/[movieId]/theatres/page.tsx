@@ -11,7 +11,7 @@ import { useBooking } from '../../../../state/BookingContext';
 interface TheatrePageProps { params: { movieId: string }; }
 
 /** Show mapped theatres and require an explicit choice before seats. */
-export default function TheatrePage({ params }: TheatrePageProps): JSX.Element {
+export default function TheatrePage({ params }: TheatrePageProps) {
   const router = useRouter();
   const { token, updateJourney } = useBooking();
   const [theatres, setTheatres] = useState<Theatre[]>([]);
@@ -20,7 +20,10 @@ export default function TheatrePage({ params }: TheatrePageProps): JSX.Element {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!token) { router.replace('/login'); return; }
+    if (!token) {
+      router.replace('/login');
+      return;
+    }
     let active = true;
     /** Load only theatres mapped to the route movie. */
     async function loadTheatres(): Promise<void> {
@@ -28,13 +31,17 @@ export default function TheatrePage({ params }: TheatrePageProps): JSX.Element {
         const result = await getTheatres(params.movieId);
         if (active) setTheatres(result);
       } catch (requestError: unknown) {
-        if (active) setError(requestError instanceof Error ? requestError.message : 'Unable to load theatres.');
+        if (active) {
+          setError(requestError instanceof Error ? requestError.message : 'Unable to load theatres.');
+        }
       } finally {
         if (active) setLoading(false);
       }
     }
     void loadTheatres();
-    return () => { active = false; };
+    return () => {
+      active = false;
+    };
   }, [params.movieId, router, token]);
 
   /** Persist the selected theatre only when the guest continues. */
@@ -44,9 +51,23 @@ export default function TheatrePage({ params }: TheatrePageProps): JSX.Element {
     router.push('/seats');
   }
 
-  return <main className="discovery-page"><section className="discovery-header" aria-labelledby="theatre-title"><p className="eyebrow">RED SEAT / THEATRES</p><h1 id="theatre-title">Pick a theatre.</h1><p>Choose one location before you continue to the seats.</p></section>
-    {loading && <p role="status">Loading theatres…</p>}
-    {error && <p className="form-error" role="alert">{error}</p>}
-    {!loading && !error && <TheatreList theatres={theatres} selectedTheatreId={selectedTheatre?.id ?? null} onSelect={setSelectedTheatre} onContinue={continueToSeats} />}
-  </main>;
+  return (
+    <main className="discovery-page">
+      <section className="discovery-header" aria-labelledby="theatre-title">
+        <p className="eyebrow">RED SEAT / THEATRES</p>
+        <h1 id="theatre-title">Pick a theatre.</h1>
+        <p>Choose one location before you continue to the seats.</p>
+      </section>
+      {loading && <p role="status">Loading theatres…</p>}
+      {error && <p className="form-error" role="alert">{error}</p>}
+      {!loading && !error && (
+        <TheatreList
+          theatres={theatres}
+          selectedTheatreId={selectedTheatre?.id ?? null}
+          onSelect={setSelectedTheatre}
+          onContinue={continueToSeats}
+        />
+      )}
+    </main>
+  );
 }

@@ -1,6 +1,69 @@
 {
   "communities": {
     "0": [
+      "frontend_app_checkout_page",
+      "frontend_app_checkout_page_checkoutpage",
+      "frontend_app_confirmation_page",
+      "frontend_app_confirmation_page_confirmationpage",
+      "frontend_app_dashboard_page",
+      "frontend_app_dashboard_page_dashboardpage",
+      "frontend_app_layout",
+      "frontend_app_layout_metadata",
+      "frontend_app_layout_rootlayout",
+      "frontend_app_login_page",
+      "frontend_app_login_page_loginpage",
+      "frontend_app_movies_movieid_theatres_page",
+      "frontend_app_movies_movieid_theatres_page_theatrepage",
+      "frontend_app_movies_movieid_theatres_page_theatrepageprops",
+      "frontend_app_seats_page",
+      "frontend_app_seats_page_seatspage",
+      "frontend_app_verify_page",
+      "frontend_app_verify_page_verifypage",
+      "frontend_components_checkoutform",
+      "frontend_components_checkoutform_checkoutform",
+      "frontend_components_checkoutform_checkoutformprops",
+      "frontend_components_confirmationticket",
+      "frontend_components_confirmationticket_confirmationticket",
+      "frontend_components_confirmationticket_confirmationticketprops",
+      "frontend_components_loginform",
+      "frontend_components_loginform_loginform",
+      "frontend_components_moviegrid",
+      "frontend_components_moviegrid_moviegrid",
+      "frontend_components_moviegrid_moviegridprops",
+      "frontend_components_otpform",
+      "frontend_components_otpform_otpform",
+      "frontend_components_seatgrid",
+      "frontend_components_seatgrid_seatgrid",
+      "frontend_components_seatgrid_seats",
+      "frontend_components_theatrelist",
+      "frontend_components_theatrelist_theatrelist",
+      "frontend_components_theatrelist_theatrelistprops",
+      "frontend_lib_apiclient",
+      "frontend_lib_apiclient_apierror",
+      "frontend_lib_apiclient_apierror_constructor",
+      "frontend_lib_apiclient_bookingconfirmation",
+      "frontend_lib_apiclient_createbooking",
+      "frontend_lib_apiclient_createbookingdto",
+      "frontend_lib_apiclient_getmovies",
+      "frontend_lib_apiclient_gettheatres",
+      "frontend_lib_apiclient_initiateotp",
+      "frontend_lib_apiclient_movie",
+      "frontend_lib_apiclient_theatre",
+      "frontend_lib_apiclient_toapierror",
+      "frontend_lib_apiclient_verifyotp",
+      "frontend_state_bookingcontext",
+      "frontend_state_bookingcontext_bookingcontext",
+      "frontend_state_bookingcontext_bookingcontextvalue",
+      "frontend_state_bookingcontext_bookingjourney",
+      "frontend_state_bookingcontext_bookingprovider",
+      "frontend_state_bookingcontext_usebooking",
+      "frontend_tests_checkout_test",
+      "frontend_tests_checkout_test_props",
+      "frontend_tests_discovery_test",
+      "frontend_tests_discovery_test_movies",
+      "frontend_tests_discovery_test_theatres"
+    ],
+    "1": [
       "backend_src_app",
       "backend_src_app_createapp",
       "backend_src_auth_auth_routes",
@@ -14,6 +77,15 @@
       "backend_src_auth_auth_service_authservice_initiateotp",
       "backend_src_auth_auth_service_authservice_verifyotp",
       "backend_src_auth_auth_service_verificationresult",
+      "backend_src_booking_booking_routes",
+      "backend_src_booking_booking_routes_bookingschema",
+      "backend_src_booking_booking_routes_createbookingrouter",
+      "backend_src_booking_booking_service",
+      "backend_src_booking_booking_service_bookingconfirmation",
+      "backend_src_booking_booking_service_bookingservice",
+      "backend_src_booking_booking_service_bookingservice_constructor",
+      "backend_src_booking_booking_service_bookingservice_createbooking",
+      "backend_src_booking_booking_service_createbookinginput",
       "backend_src_config",
       "backend_src_config_appconfig",
       "backend_src_config_config",
@@ -33,34 +105,45 @@
       "backend_src_index_startserver",
       "backend_tests_auth_api_test",
       "backend_tests_auth_api_test_directories",
-      "backend_tests_auth_api_test_maketestapp"
-    ],
-    "1": [
-      "frontend_app_layout",
-      "frontend_app_layout_metadata",
-      "frontend_app_layout_rootlayout",
-      "frontend_app_login_page",
-      "frontend_app_login_page_loginpage",
-      "frontend_app_verify_page",
-      "frontend_app_verify_page_verifypage",
-      "frontend_components_loginform",
-      "frontend_components_loginform_loginform",
-      "frontend_components_otpform",
-      "frontend_components_otpform_otpform",
-      "frontend_lib_apiclient",
-      "frontend_lib_apiclient_apierror",
-      "frontend_lib_apiclient_apierror_constructor",
-      "frontend_lib_apiclient_initiateotp",
-      "frontend_lib_apiclient_toapierror",
-      "frontend_lib_apiclient_verifyotp",
-      "frontend_state_bookingcontext",
-      "frontend_state_bookingcontext_bookingcontext",
-      "frontend_state_bookingcontext_bookingcontextvalue",
-      "frontend_state_bookingcontext_bookingjourney",
-      "frontend_state_bookingcontext_bookingprovider",
-      "frontend_state_bookingcontext_usebooking"
+      "backend_tests_auth_api_test_maketestapp",
+      "backend_tests_booking_api_test",
+      "backend_tests_booking_api_test_directories",
+      "backend_tests_booking_api_test_setup",
+      "backend_tests_booking_api_test_token",
+      "backend_tests_booking_integration_test",
+      "backend_tests_catalog_api_test",
+      "backend_tests_catalog_api_test_directories",
+      "backend_tests_catalog_api_test_maketestapp"
     ],
     "2": [
+      "frontend_tsconfig",
+      "frontend_tsconfig_compileroptions",
+      "frontend_tsconfig_compileroptions_allowjs",
+      "frontend_tsconfig_compileroptions_esmoduleinterop",
+      "frontend_tsconfig_compileroptions_incremental",
+      "frontend_tsconfig_compileroptions_isolatedmodules",
+      "frontend_tsconfig_compileroptions_jsx",
+      "frontend_tsconfig_compileroptions_lib",
+      "frontend_tsconfig_compileroptions_module",
+      "frontend_tsconfig_compileroptions_moduleresolution",
+      "frontend_tsconfig_compileroptions_noemit",
+      "frontend_tsconfig_compileroptions_plugins",
+      "frontend_tsconfig_compileroptions_resolvejsonmodule",
+      "frontend_tsconfig_compileroptions_skiplibcheck",
+      "frontend_tsconfig_compileroptions_strict",
+      "frontend_tsconfig_compileroptions_target",
+      "frontend_tsconfig_exclude",
+      "frontend_tsconfig_include",
+      "ref_dom",
+      "ref_dom_iterable",
+      "ref_esnext",
+      "ref_next_env_d_ts",
+      "ref_next_types_ts",
+      "ref_node_modules",
+      "ref_ts",
+      "ref_tsx"
+    ],
+    "3": [
       "backend_package",
       "backend_package_dependencies",
       "backend_package_dependencies_better_sqlite3",
@@ -84,7 +167,7 @@
       "jsonwebtoken",
       "zod"
     ],
-    "3": [
+    "4": [
       "backend_package_devdependencies",
       "backend_package_devdependencies_supertest",
       "backend_package_devdependencies_ts_node_dev",
@@ -92,12 +175,12 @@
       "backend_package_devdependencies_types_cors",
       "backend_package_devdependencies_types_express",
       "backend_package_devdependencies_types_jsonwebtoken",
-      "backend_package_devdependencies_types_node",
       "backend_package_devdependencies_types_supertest",
+      "backend_package_devdependencies_typescript",
       "backend_package_devdependencies_vitest",
-      "backend_package_json_types_node",
+      "backend_package_json_typescript",
       "backend_package_json_vitest",
-      "frontend_package_devdependencies_types_node",
+      "frontend_package_devdependencies_typescript",
       "supertest",
       "ts_node_dev",
       "types_better_sqlite3",
@@ -106,18 +189,18 @@
       "types_jsonwebtoken",
       "types_supertest"
     ],
-    "4": [
-      "backend_package_devdependencies_typescript",
-      "backend_package_json_typescript",
+    "5": [
+      "backend_package_devdependencies_types_node",
+      "backend_package_json_types_node",
       "frontend_package_devdependencies",
       "frontend_package_devdependencies_jsdom",
       "frontend_package_devdependencies_playwright_test",
       "frontend_package_devdependencies_testing_library_jest_dom",
       "frontend_package_devdependencies_testing_library_react",
       "frontend_package_devdependencies_testing_library_user_event",
+      "frontend_package_devdependencies_types_node",
       "frontend_package_devdependencies_types_react",
       "frontend_package_devdependencies_types_react_dom",
-      "frontend_package_devdependencies_typescript",
       "frontend_package_devdependencies_vitest",
       "frontend_package_json_vitest",
       "jsdom",
@@ -127,26 +210,6 @@
       "testing_library_user_event",
       "types_react",
       "types_react_dom"
-    ],
-    "5": [
-      "frontend_tsconfig_compileroptions",
-      "frontend_tsconfig_compileroptions_allowjs",
-      "frontend_tsconfig_compileroptions_esmoduleinterop",
-      "frontend_tsconfig_compileroptions_incremental",
-      "frontend_tsconfig_compileroptions_isolatedmodules",
-      "frontend_tsconfig_compileroptions_jsx",
-      "frontend_tsconfig_compileroptions_lib",
-      "frontend_tsconfig_compileroptions_module",
-      "frontend_tsconfig_compileroptions_moduleresolution",
-      "frontend_tsconfig_compileroptions_noemit",
-      "frontend_tsconfig_compileroptions_plugins",
-      "frontend_tsconfig_compileroptions_resolvejsonmodule",
-      "frontend_tsconfig_compileroptions_skiplibcheck",
-      "frontend_tsconfig_compileroptions_strict",
-      "frontend_tsconfig_compileroptions_target",
-      "ref_dom",
-      "ref_dom_iterable",
-      "ref_esnext"
     ],
     "6": [
       "backend_tsconfig",
@@ -186,31 +249,26 @@
       "react_dom"
     ],
     "8": [
-      "engine_workers_4a6467683208_memory_progress_summary_native_sqlite_runtime_blocker",
-      "engine_workers_4a6467683208_memory_progress_summary_typescript_typecheck",
-      "plan_backend_auth_api_verification",
-      "plan_backend_health_connectivity",
-      "plan_bookmyshow_replica_development_plan",
+      "backend_src_catalog_catalog_routes",
+      "backend_src_catalog_catalog_routes_createcatalogrouter",
+      "backend_src_catalog_catalog_routes_theatrequeryschema",
+      "backend_src_catalog_catalog_service",
+      "backend_src_catalog_catalog_service_catalogservice",
+      "backend_src_catalog_catalog_service_catalogservice_constructor",
+      "backend_src_catalog_catalog_service_catalogservice_listmovies",
+      "backend_src_catalog_catalog_service_catalogservice_listtheatres",
+      "backend_src_catalog_catalog_service_movie",
+      "backend_src_catalog_catalog_service_theatre"
+    ],
+    "9": [
+      "docker_compose_booking_data_volume",
       "plan_demo_otp_access",
-      "plan_fixed_demo_otp",
-      "plan_jwt_authentication_boundary",
-      "plan_mobile_otp_authentication",
-      "plan_separate_frontend_backend_architecture",
-      "plan_sqlite_authoritative_storage",
-      "plan_user_persistence",
+      "plan_discovery_and_fixed_seats",
+      "plan_timed_checkout_and_persisted_confirmation",
+      "readme_red_seat",
       "todos_checkout_and_confirmation",
       "todos_demo_otp_access",
       "todos_discovery_and_seats"
-    ],
-    "9": [
-      "frontend_tsconfig",
-      "frontend_tsconfig_exclude",
-      "frontend_tsconfig_include",
-      "ref_next_env_d_ts",
-      "ref_next_types_ts",
-      "ref_node_modules",
-      "ref_ts",
-      "ref_tsx"
     ],
     "10": [
       "frontend_tests_auth_test",
@@ -229,30 +287,57 @@
       "frontend_next_config_nextconfig"
     ],
     "13": [
-      "frontend_e2e_auth_spec"
+      "frontend_next_env_d",
+      "frontend_next_env_d_rationale_4"
     ],
     "14": [
+      "plan_bookmyshow_replica",
+      "plan_two_container_architecture"
+    ],
+    "15": [
+      "frontend_e2e_auth_spec"
+    ],
+    "16": [
+      "frontend_e2e_booking_spec"
+    ],
+    "17": [
+      "frontend_e2e_discovery_spec"
+    ],
+    "18": [
+      "frontend_playwright_config"
+    ],
+    "19": [
       "frontend_vitest_config"
     ]
   },
   "cohesion": {
-    "0": 0.11931818181818182,
-    "1": 0.1383399209486166,
-    "2": 0.09090909090909091,
-    "3": 0.1,
+    "0": 0.07103825136612021,
+    "1": 0.08734693877551021,
+    "2": 0.07692307692307693,
+    "3": 0.09090909090909091,
     "4": 0.1,
-    "5": 0.1111111111111111,
+    "5": 0.1,
     "6": 0.11764705882352941,
     "7": 0.125,
-    "8": 0.1619047619047619,
+    "8": 0.26666666666666666,
     "9": 0.25,
     "10": 0.3333333333333333,
     "11": 1.0,
     "12": 1.0,
     "13": 1.0,
-    "14": 1.0
+    "14": 1.0,
+    "15": 1.0,
+    "16": 1.0,
+    "17": 1.0,
+    "18": 1.0,
+    "19": 1.0
   },
   "gods": [
+    {
+      "id": "frontend_state_bookingcontext_usebooking",
+      "label": "useBooking()",
+      "degree": 15
+    },
     {
       "id": "frontend_tsconfig_compileroptions",
       "label": "compilerOptions",
@@ -264,47 +349,53 @@
       "degree": 11
     },
     {
+      "id": "backend_src_app_createapp",
+      "label": "createApp()",
+      "degree": 10
+    },
+    {
+      "id": "frontend_lib_apiclient_movie",
+      "label": "Movie",
+      "degree": 8
+    },
+    {
+      "id": "frontend_lib_apiclient_theatre",
+      "label": "Theatre",
+      "degree": 8
+    },
+    {
       "id": "backend_src_auth_auth_service_authservice",
       "label": "AuthService",
       "degree": 7
     },
     {
-      "id": "backend_package_scripts",
-      "label": "scripts",
-      "degree": 5
+      "id": "frontend_lib_apiclient_bookingconfirmation",
+      "label": "BookingConfirmation",
+      "degree": 7
     },
     {
-      "id": "backend_src_app_createapp",
-      "label": "createApp()",
-      "degree": 5
+      "id": "backend_src_catalog_catalog_service_catalogservice",
+      "label": "CatalogService",
+      "degree": 6
     },
     {
-      "id": "backend_src_auth_auth_routes_createauthrouter",
-      "label": "createAuthRouter()",
-      "degree": 5
-    },
-    {
-      "id": "frontend_package_scripts",
-      "label": "scripts",
-      "degree": 5
-    },
-    {
-      "id": "frontend_state_bookingcontext_usebooking",
-      "label": "useBooking()",
-      "degree": 5
-    },
-    {
-      "id": "frontend_tsconfig_include",
-      "label": "include",
-      "degree": 5
-    },
-    {
-      "id": "plan_demo_otp_access",
-      "label": "Demo OTP Access",
-      "degree": 5
+      "id": "backend_src_db_database_createdatabase",
+      "label": "createDatabase()",
+      "degree": 6
     }
   ],
   "surprises": [
+    {
+      "source": "Booking Data Persistent SQLite Volume",
+      "target": "Timed Checkout and Persisted Confirmation",
+      "source_files": [
+        "docker-compose.yml",
+        "PLAN.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "conceptually_related_to",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories"
+    },
     {
       "source": "demo-otp-access Todo",
       "target": "Demo OTP Access",
@@ -312,53 +403,42 @@
         "todos.yaml",
         "PLAN.md"
       ],
-      "confidence": "INFERRED",
-      "relation": "conceptually_related_to",
-      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; peripheral node `demo-otp-access Todo` unexpectedly reaches hub `Demo OTP Access`"
-    },
-    {
-      "source": "Native SQLite Runtime Blocker",
-      "target": "SQLite Authoritative Storage",
-      "source_files": [
-        ".engine/workers/4a6467683208/memory/progress_summary.md",
-        "PLAN.md"
-      ],
-      "confidence": "INFERRED",
-      "relation": "conceptually_related_to",
-      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories"
-    },
-    {
-      "source": "TypeScript Typecheck Verification",
-      "target": "Backend Auth API Verification",
-      "source_files": [
-        ".engine/workers/4a6467683208/memory/progress_summary.md",
-        "PLAN.md"
-      ],
-      "confidence": "INFERRED",
-      "relation": "conceptually_related_to",
-      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories"
-    },
-    {
-      "source": "Native SQLite Runtime Blocker",
-      "target": "Backend Auth API Verification",
-      "source_files": [
-        ".engine/workers/4a6467683208/memory/progress_summary.md",
-        "PLAN.md"
-      ],
       "confidence": "EXTRACTED",
-      "relation": "references",
+      "relation": "conceptually_related_to",
       "why": "connects across different repos/directories"
     },
     {
-      "source": "createApp()",
-      "target": "errorHandler()",
+      "source": "discovery-and-seats Todo",
+      "target": "Backend-backed Discovery and Fixed Seats",
       "source_files": [
-        "backend/src/app.ts",
-        "backend/src/http/errors.ts"
+        "todos.yaml",
+        "PLAN.md"
       ],
-      "confidence": "INFERRED",
-      "relation": "indirect_call",
-      "why": "inferred connection - not explicitly stated in source"
+      "confidence": "EXTRACTED",
+      "relation": "conceptually_related_to",
+      "why": "connects across different repos/directories"
+    },
+    {
+      "source": "Red Seat",
+      "target": "Timed Checkout and Persisted Confirmation",
+      "source_files": [
+        "README.md",
+        "PLAN.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "conceptually_related_to",
+      "why": "connects across different repos/directories"
+    },
+    {
+      "source": "checkout-and-confirmation Todo",
+      "target": "Timed Checkout and Persisted Confirmation",
+      "source_files": [
+        "todos.yaml",
+        "PLAN.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "conceptually_related_to",
+      "why": "connects across different repos/directories"
     }
   ],
   "tokens": {

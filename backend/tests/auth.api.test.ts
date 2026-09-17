@@ -68,10 +68,37 @@ describe('OTP authentication API', () => {
     expect(malformed.body.error.code).toBe('VALIDATION_ERROR');
   });
 
-  it('reports database connectivity through health', async (): Promise<void> => {
-    const { app } = await makeTestApp();
+  it('rejects missing, wrong-type, blank, and hostile authentication fields with the error envelope', async (): Promise<void> => {
+    const { app, database } = await makeTestApp();
+    const invalidLogins = [{}, { mobileNumber: 123 }, { mobileNumber: '   ' }];
+    for (const payload of invalidLogins) {
+      const response = await request(app).post('/api/auth/login').send(payload);
+      expect(response.status).toBe(400);
+      expect(response.body.error).toMatchObject({ code: 'VALIDATION_ERROR', message: 'Request body is invalid.' });
+      expect(response.body.error.correlationId).toEqual(expect.any(String));
+    }
+    for (const mobileNumber of ["'; DROP TABLE users;--", '<script>alert(1)</script>']) {
+      const response = await request(app).post('/api/auth/login').send({ mobileNumber });
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual({ data: { status: 'OTP_INITIATED', mobileNumber } });
+    }
+    const invalidVerifications = [{}, { mobileNumber: '+15550000004' }, { otp: '1234' }, { mobileNumber: 123, otp: '1234' }, { mobileNumber: '+15550000004', otp: 1234 }, { mobileNumber: ' ', otp: '1234' }, { mobileNumber: '+15550000004', otp: ' ' }];
+    for (const payload of invalidVerifications) {
+      const response = await request(app).post('/api/auth/verify').send(payload);
+      expect(response.status).toBe(400);
+      expect(response.body.error).toMatchObject({ code: 'VALIDATION_ERROR', message: 'Request body is invalid.' });
+    }
+    expect(database.prepare('SELECT COUNT(*) AS count FROM users').get()).toEqual({ count: 0 });
+  });
+
+  it('reports readiness in the specified envelope and returns 503 for a closed SQLite connection', async (): Promise<void> => {
+    const { app, database } = await makeTestApp();
     const health = await request(app).get('/api/health');
     expect(health.status).toBe(200);
-    expect(health.body).toEqual({ status: 'ok', database: 'connected' });
+    expect(health.body).toEqual({ data: { status: 'ok', database: 'reachable' } });
+    database.close();
+    const unavailable = await request(app).get('/api/health');
+    expect(unavailable.status).toBe(503);
+    expect(unavailable.body).toEqual({ error: { code: 'SERVICE_UNAVAILABLE', message: 'Database is unreachable.' } });
   });
 });
