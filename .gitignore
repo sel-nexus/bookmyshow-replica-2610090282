@@ -3,7 +3,9 @@ dist/
 .next/
 coverage/
 *.sqlite
+*.sqlite-*
 *.db
+test-results/
 .env
 .env.local
 .engine/
