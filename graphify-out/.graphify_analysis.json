@@ -15,8 +15,6 @@
       "frontend_app_movies_movieid_theatres_page",
       "frontend_app_movies_movieid_theatres_page_theatrepage",
       "frontend_app_movies_movieid_theatres_page_theatrepageprops",
-      "frontend_app_seats_page",
-      "frontend_app_seats_page_seatspage",
       "frontend_app_verify_page",
       "frontend_app_verify_page_verifypage",
       "frontend_components_checkoutform",
@@ -32,9 +30,6 @@
       "frontend_components_moviegrid_moviegridprops",
       "frontend_components_otpform",
       "frontend_components_otpform_otpform",
-      "frontend_components_seatgrid",
-      "frontend_components_seatgrid_seatgrid",
-      "frontend_components_seatgrid_seats",
       "frontend_components_theatrelist",
       "frontend_components_theatrelist_theatrelist",
       "frontend_components_theatrelist_theatrelistprops",
@@ -58,10 +53,7 @@
       "frontend_state_bookingcontext_bookingprovider",
       "frontend_state_bookingcontext_usebooking",
       "frontend_tests_checkout_test",
-      "frontend_tests_checkout_test_props",
-      "frontend_tests_discovery_test",
-      "frontend_tests_discovery_test_movies",
-      "frontend_tests_discovery_test_theatres"
+      "frontend_tests_checkout_test_props"
     ],
     "1": [
       "backend_src_app",
@@ -108,8 +100,10 @@
       "backend_tests_auth_api_test_maketestapp",
       "backend_tests_booking_api_test",
       "backend_tests_booking_api_test_directories",
+      "backend_tests_booking_api_test_expectvalidation",
       "backend_tests_booking_api_test_setup",
       "backend_tests_booking_api_test_token",
+      "backend_tests_booking_api_test_validbody",
       "backend_tests_booking_integration_test",
       "backend_tests_catalog_api_test",
       "backend_tests_catalog_api_test_directories",
@@ -249,6 +243,22 @@
       "react_dom"
     ],
     "8": [
+      "frontend_app_seats_page",
+      "frontend_app_seats_page_seatspage",
+      "frontend_components_seatgrid",
+      "frontend_components_seatgrid_seatgrid",
+      "frontend_components_seatgrid_seats",
+      "frontend_tests_discovery_test",
+      "frontend_tests_discovery_test_bookingstate",
+      "frontend_tests_discovery_test_getmovies",
+      "frontend_tests_discovery_test_gettheatres",
+      "frontend_tests_discovery_test_movies",
+      "frontend_tests_discovery_test_push",
+      "frontend_tests_discovery_test_replace",
+      "frontend_tests_discovery_test_theatres",
+      "frontend_tests_discovery_test_updatejourney"
+    ],
+    "9": [
       "backend_src_catalog_catalog_routes",
       "backend_src_catalog_catalog_routes_createcatalogrouter",
       "backend_src_catalog_catalog_routes_theatrequeryschema",
@@ -260,17 +270,15 @@
       "backend_src_catalog_catalog_service_movie",
       "backend_src_catalog_catalog_service_theatre"
     ],
-    "9": [
-      "docker_compose_booking_data_volume",
-      "plan_demo_otp_access",
-      "plan_discovery_and_fixed_seats",
-      "plan_timed_checkout_and_persisted_confirmation",
-      "readme_red_seat",
-      "todos_checkout_and_confirmation",
-      "todos_demo_otp_access",
-      "todos_discovery_and_seats"
-    ],
     "10": [
+      "frontend_test_results_confirmed_upi_booking_confirmed_upi_booking",
+      "plan_checkout_and_confirmation",
+      "plan_demo_otp_access",
+      "plan_discovery_and_seats",
+      "plan_response_driven_confirmation",
+      "readme_payment_data_browser_locality"
+    ],
+    "11": [
       "frontend_tests_auth_test",
       "frontend_tests_auth_test_bookingstate",
       "frontend_tests_auth_test_initiateotp",
@@ -278,59 +286,77 @@
       "frontend_tests_auth_test_setup",
       "frontend_tests_auth_test_verifyotp"
     ],
-    "11": [
+    "12": [
+      "docker_compose_backend_service",
+      "docker_compose_booking_data_volume",
+      "docker_compose_frontend_service",
+      "plan_two_container_topology"
+    ],
+    "13": [
+      "engine_memory_decisions_booking_history_out_of_scope",
+      "engine_memory_decisions_durable_sqlite_booking_persistence",
+      "engine_memory_decisions_ephemeral_booking_context"
+    ],
+    "14": [
+      "frontend_e2e_booking_spec",
+      "frontend_e2e_booking_spec_capturebrowsererrors",
+      "frontend_e2e_booking_spec_opencheckout"
+    ],
+    "15": [
+      "frontend_e2e_discovery_spec",
+      "frontend_e2e_discovery_spec_capturebrowsererrors",
+      "frontend_e2e_discovery_spec_logintodashboard"
+    ],
+    "16": [
       "frontend_app_page",
       "frontend_app_page_homepage"
     ],
-    "12": [
+    "17": [
+      "frontend_e2e_auth_spec",
+      "frontend_e2e_auth_spec_capturebrowsererrors"
+    ],
+    "18": [
       "frontend_next_config",
       "frontend_next_config_nextconfig"
     ],
-    "13": [
+    "19": [
       "frontend_next_env_d",
       "frontend_next_env_d_rationale_4"
     ],
-    "14": [
-      "plan_bookmyshow_replica",
-      "plan_two_container_architecture"
-    ],
-    "15": [
-      "frontend_e2e_auth_spec"
-    ],
-    "16": [
-      "frontend_e2e_booking_spec"
-    ],
-    "17": [
-      "frontend_e2e_discovery_spec"
-    ],
-    "18": [
+    "20": [
       "frontend_playwright_config"
     ],
-    "19": [
+    "21": [
       "frontend_vitest_config"
+    ],
+    "22": [
+      "readme_red_seat"
     ]
   },
   "cohesion": {
-    "0": 0.07103825136612021,
-    "1": 0.08734693877551021,
+    "0": 0.08272859216255443,
+    "1": 0.08220211161387632,
     "2": 0.07692307692307693,
     "3": 0.09090909090909091,
     "4": 0.1,
     "5": 0.1,
     "6": 0.11764705882352941,
     "7": 0.125,
-    "8": 0.26666666666666666,
-    "9": 0.25,
+    "8": 0.16483516483516483,
+    "9": 0.26666666666666666,
     "10": 0.3333333333333333,
-    "11": 1.0,
-    "12": 1.0,
-    "13": 1.0,
-    "14": 1.0,
-    "15": 1.0,
+    "11": 0.3333333333333333,
+    "12": 0.6666666666666666,
+    "13": 0.6666666666666666,
+    "14": 0.6666666666666666,
+    "15": 0.6666666666666666,
     "16": 1.0,
     "17": 1.0,
     "18": 1.0,
-    "19": 1.0
+    "19": 1.0,
+    "20": 1.0,
+    "21": 1.0,
+    "22": 1.0
   },
   "gods": [
     {
@@ -386,58 +412,58 @@
   ],
   "surprises": [
     {
-      "source": "Booking Data Persistent SQLite Volume",
+      "source": "Confirmed UPI Booking Screenshot",
       "target": "Timed Checkout and Persisted Confirmation",
       "source_files": [
-        "docker-compose.yml",
+        "frontend/test-results/confirmed-upi-booking.png",
         "PLAN.md"
       ],
       "confidence": "INFERRED",
-      "relation": "conceptually_related_to",
+      "relation": "references",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (doc \u2194 image); connects across different repos/directories"
+    },
+    {
+      "source": "Frontend and Backend Two-container Topology",
+      "target": "Backend Service",
+      "source_files": [
+        "PLAN.md",
+        "docker-compose.yml"
+      ],
+      "confidence": "INFERRED",
+      "relation": "implements",
       "why": "inferred connection - not explicitly stated in source; connects across different repos/directories"
     },
     {
-      "source": "demo-otp-access Todo",
-      "target": "Demo OTP Access",
+      "source": "Frontend and Backend Two-container Topology",
+      "target": "Frontend Service",
       "source_files": [
-        "todos.yaml",
-        "PLAN.md"
+        "PLAN.md",
+        "docker-compose.yml"
       ],
-      "confidence": "EXTRACTED",
-      "relation": "conceptually_related_to",
-      "why": "connects across different repos/directories"
+      "confidence": "INFERRED",
+      "relation": "implements",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories"
     },
     {
-      "source": "discovery-and-seats Todo",
-      "target": "Backend-backed Discovery and Fixed Seats",
+      "source": "SeatsPage()",
+      "target": "useBooking()",
       "source_files": [
-        "todos.yaml",
-        "PLAN.md"
+        "frontend/app/seats/page.tsx",
+        "frontend/state/BookingContext.tsx"
       ],
       "confidence": "EXTRACTED",
-      "relation": "conceptually_related_to",
-      "why": "connects across different repos/directories"
+      "relation": "calls",
+      "why": "bridges separate communities; peripheral node `SeatsPage()` unexpectedly reaches hub `useBooking()`"
     },
     {
-      "source": "Red Seat",
+      "source": "Payment Data Browser Locality",
       "target": "Timed Checkout and Persisted Confirmation",
       "source_files": [
         "README.md",
         "PLAN.md"
       ],
       "confidence": "EXTRACTED",
-      "relation": "conceptually_related_to",
-      "why": "connects across different repos/directories"
-    },
-    {
-      "source": "checkout-and-confirmation Todo",
-      "target": "Timed Checkout and Persisted Confirmation",
-      "source_files": [
-        "todos.yaml",
-        "PLAN.md"
-      ],
-      "confidence": "EXTRACTED",
-      "relation": "conceptually_related_to",
+      "relation": "rationale_for",
       "why": "connects across different repos/directories"
     }
   ],
