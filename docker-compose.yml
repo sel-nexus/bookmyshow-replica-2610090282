@@ -1,0 +1,28 @@
+services:
+  backend:
+    build: ./backend
+    environment:
+      DATABASE_PATH: /data/red-seat.sqlite
+      JWT_SECRET: dev-secret-change-in-production
+      JWT_ISSUER: demo-otp-access
+      JWT_AUDIENCE: demo-otp-access-web
+      PORT: 4000
+      CORS_ORIGIN: http://frontend:3000
+    volumes:
+      - booking-data:/data
+    ports:
+      - "4000:4000"
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        BACKEND_API_ORIGIN: http://backend:4000
+    environment:
+      NEXT_PUBLIC_API_BASE_URL: ""
+      BACKEND_API_ORIGIN: http://backend:4000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+volumes:
+  booking-data:

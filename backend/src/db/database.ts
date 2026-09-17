@@ -10,6 +10,7 @@ export interface UserRecord {
 /** Initialize a SQLite database and its required schema. */
 export function createDatabase(databasePath: string): Database.Database {
   const database = new Database(databasePath);
+  database.pragma('foreign_keys = ON');
   database.pragma('journal_mode = WAL');
   database.exec(`
     CREATE TABLE IF NOT EXISTS users (
@@ -28,6 +29,19 @@ export function createDatabase(databasePath: string): Database.Database {
       movie_id TEXT NOT NULL,
       theatre_id TEXT NOT NULL,
       PRIMARY KEY (movie_id, theatre_id),
+      FOREIGN KEY (movie_id) REFERENCES movies(id),
+      FOREIGN KEY (theatre_id) REFERENCES theatres(id)
+    );
+    CREATE TABLE IF NOT EXISTS bookings (
+      id TEXT PRIMARY KEY,
+      user_id INTEGER NOT NULL,
+      movie_id TEXT NOT NULL,
+      theatre_id TEXT NOT NULL,
+      seats_json TEXT NOT NULL,
+      payment_method TEXT NOT NULL CHECK (payment_method IN ('CARD', 'UPI')),
+      total_price INTEGER NOT NULL CHECK (total_price = 450),
+      currency TEXT NOT NULL CHECK (currency = 'INR'),
+      FOREIGN KEY (user_id) REFERENCES users(id),
       FOREIGN KEY (movie_id) REFERENCES movies(id),
       FOREIGN KEY (theatre_id) REFERENCES theatres(id)
     );

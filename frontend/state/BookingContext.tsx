@@ -2,7 +2,7 @@
 'use client';
 
 import { createContext, useContext, useMemo, useState, type ReactNode } from 'react';
-import type { Movie, Theatre } from '../lib/apiClient';
+import type { BookingConfirmation, Movie, Theatre } from '../lib/apiClient';
 
 /** Describe state retained throughout a booking journey. */
 export interface BookingJourney {
@@ -12,9 +12,9 @@ export interface BookingJourney {
   theatre: Theatre | null;
   seats: string[];
   total: number;
-  paymentMethod: string;
+  paymentMethod: 'CARD' | 'UPI' | '';
   paymentStatus: string;
-  confirmation: string;
+  confirmation: BookingConfirmation | null;
 }
 
 /** Describe state update operations for the booking journey. */
@@ -30,7 +30,7 @@ const BookingContext = createContext<BookingContextValue | undefined>(undefined)
 export function BookingProvider({ children }: { children: ReactNode }): JSX.Element {
   const [journey, setJourney] = useState<BookingJourney>({
     mobileNumber: '', token: '', movie: null, theatre: null, seats: [], total: 0,
-    paymentMethod: '', paymentStatus: '', confirmation: ''
+    paymentMethod: '', paymentStatus: '', confirmation: null
   });
   const value = useMemo<BookingContextValue>(() => ({
     ...journey,

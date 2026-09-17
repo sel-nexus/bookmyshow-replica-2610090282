@@ -7,6 +7,12 @@ export interface Movie { id: string; title: string; }
 /** Describe a theatre returned by catalogue discovery. */
 export interface Theatre { id: string; name: string; }
 
+/** Describe the safe data submitted to create a booking. */
+export interface CreateBookingDto { movieId: string; theatreId: string; seats: string[]; paymentMethod: 'CARD' | 'UPI'; total: number; }
+
+/** Describe a backend-issued booking confirmation. */
+export interface BookingConfirmation { confirmationId: string; movie: Movie; theatre: Theatre; seats: string[]; paymentMethod: 'CARD' | 'UPI'; total: 450; currency: 'INR'; }
+
 /** Describe an API error returned by the backend. */
 export class ApiError extends Error {
   /** Construct a public API failure. */
@@ -53,6 +59,18 @@ export async function getTheatres(movieId?: string): Promise<Theatre[]> {
   if (!response.ok) throw await toApiError(response);
   const payload = await response.json() as { data: { theatres: Theatre[] } };
   return payload.data.theatres;
+}
+
+/** Create a booking using only the documented booking DTO and bearer token. */
+export async function createBooking(booking: CreateBookingDto, token: string): Promise<BookingConfirmation> {
+  const response = await fetch(`${apiBaseUrl}/api/bookings`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+    body: JSON.stringify(booking)
+  });
+  if (!response.ok) throw await toApiError(response);
+  const payload = await response.json() as { data: BookingConfirmation };
+  return payload.data;
 }
 
 /** Convert an unsuccessful response into a readable error. */
