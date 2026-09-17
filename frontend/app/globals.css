@@ -16,4 +16,19 @@ button:hover:not(:disabled), button:focus-visible { background: #151313; }
 button:disabled { cursor: wait; opacity: 0.65; }
 .form-error { margin: 0; color: #b00020; font-weight: 700; }
 .help-text { margin: 0; color: #4b4545; font-size: 0.9rem; }
+.discovery-page { width: min(100% - 2rem, 68rem); margin: 0 auto; padding: clamp(2rem, 7vw, 5rem) 0; }
+.discovery-header { max-width: 44rem; padding-bottom: 2.5rem; border-bottom: 3px solid #151313; }
+.discovery-header h1 { max-width: 13ch; }
+.discovery-header p:not(.eyebrow) { max-width: 38rem; line-height: 1.55; }
+.movie-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; padding: 2rem 0 0; margin: 0; list-style: none; }
+.movie-card { min-height: 14rem; padding: 1.5rem; background: #fff; border: 2px solid #151313; box-shadow: 0.4rem 0.4rem 0 #c41122; display: flex; flex-direction: column; align-items: flex-start; }
+.movie-card h2 { margin: 0; font-size: 2rem; letter-spacing: -0.05em; }
+.movie-card button { width: 100%; margin-top: auto; }
+.theatre-list { display: grid; gap: 0.75rem; padding: 2rem 0 1rem; margin: 0; list-style: none; }
+.theatre-option { width: 100%; margin: 0; text-align: left; background: #fff; color: #151313; }
+.theatre-option.is-selected, .theatre-option:hover:not(:disabled), .theatre-option:focus-visible { background: #151313; color: #fff; }
+.seat-grid { display: grid; grid-template-columns: repeat(3, minmax(4rem, 7rem)); gap: 0.75rem; padding: 2rem 0; }
+.seat { display: grid; min-height: 4.5rem; place-items: center; border: 2px solid #151313; background: #fff; font-weight: 800; }
+.empty-state { padding: 2rem; border: 2px dashed #151313; background: #fff; }
+@media (max-width: 38rem) { .discovery-page { width: min(100% - 1.5rem, 68rem); } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; } }

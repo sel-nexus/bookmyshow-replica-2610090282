@@ -2,13 +2,14 @@
 'use client';
 
 import { createContext, useContext, useMemo, useState, type ReactNode } from 'react';
+import type { Movie, Theatre } from '../lib/apiClient';
 
 /** Describe state retained throughout a booking journey. */
 export interface BookingJourney {
   mobileNumber: string;
   token: string;
-  movie: string;
-  theatre: string;
+  movie: Movie | null;
+  theatre: Theatre | null;
   seats: string[];
   total: number;
   paymentMethod: string;
@@ -28,7 +29,7 @@ const BookingContext = createContext<BookingContextValue | undefined>(undefined)
 /** Provide booking journey state to client components. */
 export function BookingProvider({ children }: { children: ReactNode }): JSX.Element {
   const [journey, setJourney] = useState<BookingJourney>({
-    mobileNumber: '', token: '', movie: '', theatre: '', seats: [], total: 0,
+    mobileNumber: '', token: '', movie: null, theatre: null, seats: [], total: 0,
     paymentMethod: '', paymentStatus: '', confirmation: ''
   });
   const value = useMemo<BookingContextValue>(() => ({

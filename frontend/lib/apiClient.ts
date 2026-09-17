@@ -1,6 +1,12 @@
 /** Call the OTP access API. */
 const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? '';
 
+/** Describe a movie returned by catalogue discovery. */
+export interface Movie { id: string; title: string; }
+
+/** Describe a theatre returned by catalogue discovery. */
+export interface Theatre { id: string; name: string; }
+
 /** Describe an API error returned by the backend. */
 export class ApiError extends Error {
   /** Construct a public API failure. */
@@ -30,6 +36,23 @@ export async function verifyOtp(mobileNumber: string, otp: string): Promise<stri
   }
   const payload = await response.json() as { data: { token: string } };
   return payload.data.token;
+}
+
+/** Fetch movies supplied by the persisted catalogue. */
+export async function getMovies(): Promise<Movie[]> {
+  const response = await fetch(`${apiBaseUrl}/api/movies`);
+  if (!response.ok) throw await toApiError(response);
+  const payload = await response.json() as { data: { movies: Movie[] } };
+  return payload.data.movies;
+}
+
+/** Fetch theatres optionally mapped to a selected movie. */
+export async function getTheatres(movieId?: string): Promise<Theatre[]> {
+  const query = movieId ? `?movieId=${encodeURIComponent(movieId)}` : '';
+  const response = await fetch(`${apiBaseUrl}/api/theatres${query}`);
+  if (!response.ok) throw await toApiError(response);
+  const payload = await response.json() as { data: { theatres: Theatre[] } };
+  return payload.data.theatres;
 }
 
 /** Convert an unsuccessful response into a readable error. */
